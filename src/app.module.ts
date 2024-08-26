@@ -1,24 +1,31 @@
+import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import { AppController } from './app.controller';
+import { RmqService } from './rmq.service';
 
 @Module({
   imports: [
-    ClientsModule.register([
-      {
-        name: 'SERVICE_1',
-        transport: Transport.RMQ,
-        options: {
-          urls: ['amqp://rabbit:rabbitpassword@localhost:3140'],
-          queue: 'nestjs_1',
-          queueOptions: {
-            durable: true,
-          },
+    RabbitMQModule.forRoot(RabbitMQModule, {
+      exchanges: [
+        {
+          name: 'nestjs-exchange-1',
+          type: 'topic',
+        },
+      ],
+      uri: 'amqp://rabbit:rabbitpassword@localhost:3140',
+      channels: {
+        'nestjs-channel-1': {
+          prefetchCount: 15,
+          default: true,
+        },
+        'nestjs-channel-2': {
+          prefetchCount: 2,
         },
       },
-    ]),
+    }),
   ],
   controllers: [AppController],
+  providers: [RmqService],
 })
 export class AppModule {}

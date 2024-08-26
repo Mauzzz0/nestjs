@@ -1,21 +1,17 @@
-import { Controller, Get, Inject } from '@nestjs/common';
-import { ClientRMQ, Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
+import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  constructor(
-    @Inject('SERVICE_1')
-    private readonly rmq: ClientRMQ,
-  ) {}
+  constructor(private readonly amqpConnection: AmqpConnection) {}
 
   @Get('1')
   async push1() {
-    this.rmq.emit('nestjs_1', '{"que": 1}');
-    return true;
+    return this.amqpConnection.publish('nestjs-exchange-1', 'nestjs-1', 'This message 1!!');
   }
 
-  @EventPattern('nestjs_1')
-  nestjs1(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log(data);
+  @Get('2')
+  async push2() {
+    return this.amqpConnection.publish('nestjs-exchange-1', 'nestjs-2', 'This message 2!!');
   }
 }
