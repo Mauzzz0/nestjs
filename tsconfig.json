@@ -44,6 +44,11 @@
     "incremental": true,
     "alwaysStrict": true,
     "strictPropertyInitialization": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": false,
+    "moduleDetection": "force"
   }
 }

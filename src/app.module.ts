@@ -2,10 +2,12 @@ import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
+import { AppConfigModule } from './config/config.module';
 import { RmqService } from './rmq.service';
 
 @Module({
   imports: [
+    AppConfigModule,
     RabbitMQModule.forRoot(RabbitMQModule, {
       exchanges: [
         {
