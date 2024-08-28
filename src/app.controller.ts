@@ -1,13 +1,17 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+import { ExampleQueryDto } from './dto/exampleQueryDto';
+
+@ApiTags('asd')
 @Controller()
 export class AppController {
   constructor(private readonly amqpConnection: AmqpConnection) {}
 
-  @Get('1')
-  async push1() {
-    return this.amqpConnection.publish('nestjs-exchange-1', 'nestjs-1', 'This message 1!!');
+  @Post('')
+  async post(@Query() query: ExampleQueryDto) {
+    return query;
   }
 
   @Get('2')
