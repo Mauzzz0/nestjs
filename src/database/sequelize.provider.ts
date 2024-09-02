@@ -13,9 +13,6 @@ export const createSequelizeProvider = (): Provider => ({
 
     const sequelize: Sequelize = new Sequelize({
       dialect: 'postgres',
-      benchmark: true,
-      pool: { min: 5, max: 40 },
-      dialectOptions: { decimalNumbers: true },
       logging: false,
       ...options,
     });

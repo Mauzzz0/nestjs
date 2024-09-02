@@ -4,12 +4,14 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
+import { HealthModule } from './health/health.module';
 import { RmqService } from './rmq.service';
 
 @Module({
   imports: [
     AppConfigModule,
     DatabaseModule,
+    HealthModule,
     RabbitMQModule.forRoot(RabbitMQModule, {
       exchanges: [
         {

@@ -5,7 +5,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { ExampleEntity } from './database/entities';
 import { SEQUELIZE_TOKEN } from './database/sequelize.provider';
 
-@Controller()
+@Controller('app')
 export class AppController {
   constructor(
     @Inject(SEQUELIZE_TOKEN)
