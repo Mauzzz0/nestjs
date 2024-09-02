@@ -1,6 +1,8 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table({ timestamps: true, tableName: 'examples' })
+import { Tables } from '../utils/enums';
+
+@Table({ timestamps: true, tableName: Tables.examples })
 export class ExampleEntity extends Model {
   @Column({
     type: DataType.INTEGER,

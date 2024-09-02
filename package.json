@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nest start"
+    "build": "nest build",
+    "start": "nest start",
+    "migrations:generate": "ts-node src/database/utils/migrations.generate.ts",
+    "migrations:run": "npm run build && npx sequelize-cli db:migrate",
+    "migrations:undo": "npm run build && npx sequelize-cli db:migrate:undo"
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +39,7 @@
     "amqplib": "^0.10.4",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dayjs": "^1.11.13",
     "pg": "^8.12.0",
     "pino": "^9.3.2",
     "pino-pretty": "^11.2.2",

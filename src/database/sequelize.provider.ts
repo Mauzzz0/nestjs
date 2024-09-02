@@ -19,7 +19,6 @@ export const createSequelizeProvider = (): Provider => ({
 
     sequelize.addModels(entities);
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
 
     return sequelize;
   },
