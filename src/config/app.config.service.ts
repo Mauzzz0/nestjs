@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppConfigDto } from 'config/dto/app.config.dto';
+import { SequelizeOptions } from 'sequelize-typescript';
 
 import { CONFIG_BASE_PATH } from './constants';
 
@@ -24,5 +25,11 @@ export class AppConfigService {
 
   public get port(): number {
     return this.env.port;
+  }
+
+  public get sequelizeOptions(): SequelizeOptions {
+    const { read, write } = this.env.postgres;
+
+    return { replication: { write, read: [read] } };
   }
 }

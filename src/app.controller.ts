@@ -1,14 +1,31 @@
-import { Controller, Logger, Post, Query } from '@nestjs/common';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { QueryTypes } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 
-import { ExampleQueryDto } from './dto/exampleQueryDto';
+import { ExampleEntity } from './database/entities';
+import { SEQUELIZE_TOKEN } from './database/sequelize.provider';
 
 @Controller()
 export class AppController {
-  private readonly logger = new Logger(AppController.name);
+  constructor(
+    @Inject(SEQUELIZE_TOKEN)
+    private readonly sequelize: Sequelize,
 
-  @Post('')
-  async post(@Query() query: ExampleQueryDto) {
-    this.logger.log('Пришел запрос POST /');
-    return query;
+    @Inject(ExampleEntity.name)
+    private readonly examples: typeof ExampleEntity,
+  ) {}
+
+  @Get('')
+  async get() {
+    const [result] = await this.sequelize.query<{ version: string }>('select version()', {
+      type: QueryTypes.SELECT,
+    });
+
+    return result;
+  }
+
+  @Get('/:id')
+  async getById(@Param('id') id: string) {
+    return this.examples.findOne({ where: { id: Number(id) } });
   }
 }

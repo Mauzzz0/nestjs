@@ -3,11 +3,13 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppConfigModule } from './config/config.module';
+import { DatabaseModule } from './database/database.module';
 import { RmqService } from './rmq.service';
 
 @Module({
   imports: [
     AppConfigModule,
+    DatabaseModule,
     RabbitMQModule.forRoot(RabbitMQModule, {
       exchanges: [
         {
