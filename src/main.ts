@@ -22,7 +22,7 @@ export async function bootstrap() {
   const port = configService.port;
 
   await app.listen(port, () => {
-    console.log(
+    logger.log(
       `The server started listening for incoming connections on port ${port}`,
       'Bootstrap',
     );
