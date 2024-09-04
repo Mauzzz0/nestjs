@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { NestedConfigDto } from 'decorators/nested.config.dto';
+import { NestedConfigDto } from 'decorators';
 
 export class PostgresReplicaConfigDto {
   @IsString()
