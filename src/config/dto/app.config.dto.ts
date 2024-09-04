@@ -4,6 +4,7 @@ import { Environment } from 'config/constants';
 
 import { NestedConfigDto } from '../../decorators/nested.config.dto';
 import { PostgresConfigDto } from './postgres.config.dto';
+import { RabbitConfigDto } from './rabbit.config.dto';
 
 export class AppConfigDto {
   @IsEnum(Environment)
@@ -17,4 +18,7 @@ export class AppConfigDto {
 
   @NestedConfigDto(PostgresConfigDto)
   readonly postgres: PostgresConfigDto;
+
+  @NestedConfigDto(RabbitConfigDto)
+  readonly rabbit: RabbitConfigDto;
 }

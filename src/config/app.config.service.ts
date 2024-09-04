@@ -32,4 +32,10 @@ export class AppConfigService {
 
     return { replication: { write, read: [read] } };
   }
+
+  public get rabbitConnectionString(): string {
+    const { user, password, host, port } = this.env.rabbit;
+
+    return `amqp://${user}:${password}@${host}:${port}`;
+  }
 }

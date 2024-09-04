@@ -23,6 +23,12 @@ const configMap = (): EnvStructure<AppConfigDto> => ({
       database: process.env.POSTGRES_WRITE_DB,
     },
   },
+  rabbit: {
+    host: process.env.RABBITMQ_HOST,
+    port: process.env.RABBITMQ_PORT,
+    user: process.env.RABBITMQ_USER,
+    password: process.env.RABBITMQ_PASSWORD,
+  },
 });
 
 export default configMap;
