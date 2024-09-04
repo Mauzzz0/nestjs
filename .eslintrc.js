@@ -14,7 +14,7 @@ module.exports = {
     'prettier',
   ],
   root: true,
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'sequelize.config.js'],
   rules: {
     '@typescript-eslint/semi': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
