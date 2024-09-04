@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nest build",
     "start": "nest start",
+    "start:prod": "node ./dist/main",
     "migrations:generate": "ts-node src/database/utils/migrations.generate.ts",
     "migrations:run": "npm run build && npx sequelize-cli db:migrate",
     "migrations:undo": "npm run build && npx sequelize-cli db:migrate:undo"
