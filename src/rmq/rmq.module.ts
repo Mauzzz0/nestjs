@@ -3,6 +3,7 @@ import { Global, Module } from '@nestjs/common';
 
 import { AppConfigService } from '../config/app.config.service';
 import { rabbitMqConfig } from './rmq.channels';
+import { RmqHandler } from './rmq.handler';
 import { RmqService } from './rmq.service';
 
 const rabbitMqModule = RabbitMQModule.forRootAsync(RabbitMQModule, {
@@ -15,8 +16,8 @@ const rabbitMqModule = RabbitMQModule.forRootAsync(RabbitMQModule, {
 
 @Global()
 @Module({
-  providers: [RmqService],
+  providers: [RmqHandler, RmqService],
   imports: [rabbitMqModule],
-  exports: [rabbitMqModule],
+  exports: [rabbitMqModule, RmqService],
 })
 export class RmqModule {}
